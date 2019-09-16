@@ -130,3 +130,86 @@ function resetQuestions() {
         
     }
 }
+
+function showQuestions() {
+	questions = Object.keys(questionslist);
+	for (var i = 0; i < questions.length; i++) {
+			var questiontitle = questions[i];
+			var question = questionslist[questiontitle];
+			var questionblocks = createQuestions(question, questiontitle);
+			$(".question-block").append(questionblocks).show();
+	}
+}
+
+function createQuestions(question, key) {
+	var block = $("<div class='question' name='" + key + "'>" + question.question + "" +
+			"<ul>" +
+			"<li><input type='radio' name='" + key + "' value='A'><label>" + question.A + "</label></li>" +
+			"<li><input type='radio' name='" + key + "' value='B'><label>" + question.B + "</label></li>" +
+			"<li><input type='radio' name='" + key + "' value='C'><label>" + question.C + "</label></li>" +
+			"<li><input type='radio' name='" + key + "' value='D'><label>" + question.D + "</label></li>" +
+			"</ul>");
+
+	return block;
+}
+
+function score() {
+	/*console.log($("input:radio[name='q0']:checked").val());*/
+	var playeranswers = [$("input:radio[name='q0']:checked").val(),
+			$("input:radio[name='q1']:checked").val(),
+			$("input:radio[name='q2']:checked").val(),
+			$("input:radio[name='q3']:checked").val(),
+			$("input:radio[name='q4']:checked").val(),
+			$("input:radio[name='q5']:checked").val(),
+			$("input:radio[name='q6']:checked").val(),
+			$("input:radio[name='q7']:checked").val()];
+
+	console.log(playeranswers);
+	console.log(answers);
+
+	for (k = 0; k < questions.length; k++) {
+			if (playeranswers[k] === undefined) {
+					trivia.blank++;
+			} else if (playeranswers[k] === answers[k]) {
+					trivia.correct++;
+			} else {
+					trivia.incorrect++;
+			}
+
+	}
+
+	$("#correct").text("Correct: " + trivia.correct);
+	$("#incorrect").text("Incorrect: " + trivia.incorrect);
+	$("#unanswered").text("Unanswered: " + trivia.blank);
+
+	console.log(trivia.correct);
+	console.log(trivia.incorrect);
+	console.log(trivia.blank);
+}
+
+// Start the game
+
+$(document).ready(function () {
+
+	$(".start").on("click", function () {
+			$(".start").hide();
+			startTrivia();
+			timer.start();
+			$(".done").show();
+
+	});
+
+	$(".done").on("click", function () {
+			score();
+			$(".done, .question-block").hide();
+			timer.reset();
+			$(".results, .reset").show();
+	});
+
+	$(".reset").on("click", function () {
+			$(".question-block").empty();
+			$(".start").show();
+			$(".reset, .results").hide();
+			timer.reset();
+	});
+});
