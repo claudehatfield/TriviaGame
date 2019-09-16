@@ -1,3 +1,70 @@
+var questionslist = {};
+var trivia = {};
+
+var questions;
+var answers = ["B", "D", "A", "B", "D", "A", "B", "D"];
+
+var intervalID;
+
+
+// Create timer
+timer = {
+
+	time: 120,
+
+	start: function () {
+			$("#timer-display").text("02:00");
+			intervalID = setInterval(timer.countdown, 1000);
+	},
+
+	countdown: function () {
+			/*console.log("countdown");*/
+			timer.time--;
+			var currentTime = timer.timeConverter(timer.time);
+			/*console.log(currentTime);*/
+			$("#timer-display").text(currentTime);
+
+			if (timer.time === 0) {
+					$("#timer-display").text("Time's Up!");
+					clearInterval(intervalID);
+					$(".done, .question-block").hide();
+					/*$(".question-block").hide();*/
+					score();
+					$(".results, .reset").show();
+			} else {
+
+			}
+	},
+
+	reset: function () {
+			timer.time = 120;
+			$("#timer-display").text("02:00");
+			clearInterval(intervalID);
+			/*console.log("Reset");*/
+	},
+
+	timeConverter: function (t) {
+			var minutes = Math.floor(t / 60);
+			var seconds = t - (minutes * 60);
+
+			if (seconds < 10) {
+					seconds = "0" + seconds;
+			}
+
+			if (minutes === 0) {
+					minutes = "00";
+			}
+
+			else if (minutes < 10) {
+					minutes = "0" + minutes;
+			}
+
+			return minutes + ":" + seconds;
+	},
+
+};
+
+
 function resetQuestions() {
 	return {
 			q0: {
