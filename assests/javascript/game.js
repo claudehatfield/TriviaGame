@@ -124,7 +124,7 @@ $(document).ready(function () {
         ];
 
         console.log(playeranswers);
-        console.log(answers);
+        
 
         for (k = 0; k < questions.length; k++) {
             if (playeranswers[k] === undefined) {
