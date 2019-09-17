@@ -4,7 +4,7 @@ var questionslist = {};
 var trivia = {};
 
 var questions;
-var answers = ["B", "D", "A", "B", "D", "A", "B", "D"];
+var answers = ["B", "D", "A", "B", "D", "A"];
 
 var intervalID;
 
@@ -160,9 +160,7 @@ function score() {
 			$("input:radio[name='q2']:checked").val(),
 			$("input:radio[name='q3']:checked").val(),
 			$("input:radio[name='q4']:checked").val(),
-			$("input:radio[name='q5']:checked").val(),
-			$("input:radio[name='q6']:checked").val(),
-			$("input:radio[name='q7']:checked").val()];
+			$("input:radio[name='q5']:checked").val(),];
 
 	console.log(playeranswers);
 	console.log(answers);

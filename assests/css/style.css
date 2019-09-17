@@ -1,0 +1,11 @@
+.wrapper{
+  padding: 20px;
+}
+
+body{
+  font-family:  'Lacquer', sans-serif;
+  
+  background-image: url("../image/here.jpg");
+  background-size: 100% ;
+  background-repeat: no-repeat;
+}
